@@ -1,0 +1,97 @@
+//ОБЕРТКА
+.app-wrapper {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-areas:
+          "h h h"
+          "n c c";
+  grid-template-rows: 90px 1fr;
+  grid-template-columns: 2fr 10fr;
+  grid-gap: 20px;
+}
+
+//ШАПКА
+.header {
+  grid-area: h;
+  background-color: #4A76A8;
+
+  .logo {
+    height: 100%;
+    margin-left: 5%;
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 70px;
+      height: auto;
+      margin-right: 15px;
+    }
+
+    span {
+      width: 80px;
+      font-size: 20px;
+      line-height: 1;
+      color: #fff;
+    }
+  }
+
+}
+
+//НАВИГАЦИЯ
+.nav {
+  grid-area: n;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  background-color: #4A76A8;
+
+  a {
+    margin: 7px 0 7px 0;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+
+    &:last-child {
+      margin-top: 50px;
+    }
+  }
+}
+
+//ОСНОВНАЯ ЧАСТЬ
+.content {
+  grid-area: c;
+  border: 1px solid #4A76A8;
+
+  .background {
+    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0% 80%;
+  }
+
+  .author {
+
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+    }
+
+    span {
+      font-size: 30px;
+      margin-left: 20px;
+
+      p {
+        margin: 0;
+        font-size: 18px;
+        color: #666;
+      }
+    }
+  }
+}
