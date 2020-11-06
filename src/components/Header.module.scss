@@ -1,0 +1,25 @@
+//HEADER
+.header {
+  grid-area: h;
+  background-color: #4A76A8;
+
+  .logo {
+    height: 100%;
+    margin-left: 5%;
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 70px;
+      height: auto;
+      margin-right: 15px;
+    }
+
+    span {
+      width: 80px;
+      font-size: 20px;
+      line-height: 1;
+      color: #fff;
+    }
+  }
+}

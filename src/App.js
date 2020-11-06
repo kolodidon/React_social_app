@@ -7,16 +7,16 @@ import Profile from "./components/Profile";
 const App = () => {
 
     return (
-        // Обёртка
+        //Wrapper
         <div className='app-wrapper'>
 
-            {/*Шапка*/}
+            {/*Header*/}
             <Header/>
 
-            {/*Сайдбар*/}
+            {/*Sidebar*/}
             <Sidebar/>
 
-            {/*Основная часть*/}
+            {/*Profile*/}
             <Profile/>
 
         </div>
