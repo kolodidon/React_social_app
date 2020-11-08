@@ -6,6 +6,10 @@
   flex-direction: column;
   background-color: #4A76A8;
 
+  .active {
+    color: orange;
+  }
+
   a {
     margin: 7px 0 7px 0;
     display: block;

@@ -3,7 +3,7 @@ import s from './News.module.scss'
 
 const News = (props) => {
     return (
-        <div>
+        <div style={{backgroundColor: 'blue', width: '100%', height: '100%' }}>
             News
         </div>
     )

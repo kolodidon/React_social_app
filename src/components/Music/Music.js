@@ -3,7 +3,7 @@ import s from './Music.module.scss'
 
 const Music = (props) => {
     return (
-        <div>
+        <div style={{backgroundColor: 'green', width: '100%', height: '100%' }}>
             Music
         </div>
     )

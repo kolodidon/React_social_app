@@ -1,15 +1,16 @@
 import React from 'react';
 import s from './Sidebar.module.scss'
+import {NavLink} from "react-router-dom";
 
 const Sidebar = () => {
     return (
         <aside className={s.nav}>
             <nav>
-                <a href="/">Profile</a>
-                <a href="/dialogs">Dialogs</a>
-                <a href="/news">News</a>
-                <a href="/music">Music</a>
-                <a href="/settings">Settings</a>
+                <NavLink activeClassName = {s.active} to="/" exact>Profile</NavLink>
+                <NavLink activeClassName = {s.active} to="/dialogs">Dialogs</NavLink>
+                <NavLink activeClassName = {s.active} to="/news">News</NavLink>
+                <NavLink activeClassName = {s.active} to="/music">Music</NavLink>
+                <NavLink activeClassName = {s.active} to="/settings">Settings</NavLink>
             </nav>
         </aside>
     )
