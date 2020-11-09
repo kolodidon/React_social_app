@@ -24,7 +24,7 @@ const App = () => {
 
                 {/*Сontent*/}
                 <div className="app-wrapper-content">
-                    <Route path="/" exact component={Profile}/>
+                    <Route exact path="/" component={Profile}/>
                     <Route path="/dialogs" component={Dialogs}/>
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>

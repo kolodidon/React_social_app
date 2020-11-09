@@ -1,23 +1,13 @@
 .dialogsWrapper {
+  padding: 30px;
   display: grid;
   grid-template-columns: 1fr 5fr;
 
   .dialogs {
-    padding: 10px;
-
-    .dialog {
-
-    }
-    .dialogActive {
-      color: #4A76A8;
-    }
+    border-right: 1px solid #4A76A8;
   }
 
   .messages {
-    padding: 10px;
-
-    .message {
-
-    }
+    margin-left: 30px;
   }
 }

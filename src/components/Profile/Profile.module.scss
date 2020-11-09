@@ -8,27 +8,4 @@
     background-size: cover;
     background-position: 0% 80%;
   }
-
-  .author {
-
-    display: flex;
-    align-items: center;
-
-    img {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-    }
-
-    span {
-      font-size: 30px;
-      margin-left: 20px;
-
-      p {
-        margin: 0;
-        font-size: 18px;
-        color: #666;
-      }
-    }
-  }
 }
