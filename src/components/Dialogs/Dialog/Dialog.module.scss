@@ -1,15 +1,27 @@
-.dialog a {
-  margin: 7px 0 7px 0;
-  display: block;
-  color: #4A76A8;
-  text-decoration: none;
-  font-size: 20px;
+.dialog {
+  margin: 5px 0px;
+  display: flex;
+  align-items: center;
 
-  &:hover {
-    color: #2A46A8;
+  a {
+    margin: 7px 0 7px 0;
+    display: block;
+    color: #4A76A8;
+    text-decoration: none;
+    font-size: 20px;
+
+    &:hover {
+      color: #2A46A8;
+    }
+  }
+
+  .dialogActive a {
+    color: gold;
   }
 }
 
-.dialogActive a{
-  color: gold;
+.dialogImage {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
 }

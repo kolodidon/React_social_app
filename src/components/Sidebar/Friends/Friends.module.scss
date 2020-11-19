@@ -1,0 +1,12 @@
+.friendsWrapper * {
+  color: #fff;
+}
+.friends {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.friendsTitle {
+  color: #fff;
+  font-size: 20px;
+}
