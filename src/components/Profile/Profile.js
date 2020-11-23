@@ -12,7 +12,7 @@ const Profile = (props) => {
 
             <ProfileInfo avatar={Ava} firstName='Doodie' surname="Moodie" position="Junior Web-developer" workPlace="Konvertraf LLC"/>
 
-            <MyPosts postData={props.data.postData}/>
+            <MyPosts postData={props.data.postData} addPost={props.addPost} catchPostText={props.catchPostText} newPostText={props.data.newPostText}/>
         </main>
     )
 }

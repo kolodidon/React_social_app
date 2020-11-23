@@ -3,7 +3,7 @@ import s from './Message.module.scss'
 
 const Message = (props) => {
     return(
-        <div className={s.message}>{props.text}</div>
+        <span className={s.message}>{props.text}</span>
     )
 }
 

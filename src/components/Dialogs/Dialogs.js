@@ -15,7 +15,13 @@ const Dialogs = (props) => {
                 { dialogElements }
             </div>
             <div className = {s.messages}>
+                <div className = {s.messageWrapper}>
                 { messageElements }
+                </div>
+                <div className = {s.writeMessage}>
+                    <textarea placeholder='Type your message...' className = {s.writeMessageTextarea}></textarea>
+                    <button className = {s.writeMessageButton} type="submit">Post</button>
+                </div>
             </div>
         </div>
     )
