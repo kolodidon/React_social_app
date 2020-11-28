@@ -10,11 +10,11 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef();
 
     let addPost = () => {
-        props.addPost();
+        props.dispatch({type: 'ADD-POST'});
     }
 
     let onPostChange = () => {
-        props.catchPostText(newPostElement.current.value);
+        props.dispatch({type: 'CATCH-POST-TEXT', typedPost: newPostElement.current.value})
     }
 
     return (
