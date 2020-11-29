@@ -2,7 +2,8 @@ import React from 'react';
 import s from './MyPosts.module.scss'
 import Post from "./Post/Post";
 import Ava from "../../../assets/Ava.png";
-import {addPostActionCreator, catchPostTextActionCreator} from "../../../redux/state";
+import {addPostActionCreator, catchPostTextActionCreator} from "../../../redux/profile-reducer";
+
 
 
 const MyPosts = (props) => {

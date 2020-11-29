@@ -1,6 +1,7 @@
 import React from 'react'
 import s from './WriteMessage.module.scss'
-import {addMessageActionCreator, catchMessageTextActionCreator} from "../../../../redux/state";
+import {addMessageActionCreator, catchMessageTextActionCreator} from "../../../../redux/dialogs-reducer";
+
 
 const WriteMessage = (props) => {
 
