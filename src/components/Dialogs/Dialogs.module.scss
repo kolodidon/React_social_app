@@ -4,49 +4,5 @@
   display: grid;
   grid-template-columns: 1fr 5fr;
 
-  .dialogs {
-    padding-top: 30px;
-    border-right: 1px solid #4A76A8;
-  }
-
-  .messageWrapper {
-    max-width: 30%;
-  }
-
-  .messages {
-    display: grid;
-    position: relative;
-    padding-top: 30px;
-    padding-left: 30px;
-  }
-  .writeMessage {
-    width: calc(100% - 30px);
-    padding: 15px;
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    background-color: #4A76A8;
-
-    .writeMessageTextarea {
-      height: 100%;
-      flex-grow: 1;
-      padding: 5px 5px 5px 5px;
-      border-radius: 10px;
-      border: none;
-      resize: none;
-      margin-right: 15px;
-    }
-    .writeMessageButton {
-      width: 8%;
-      background-color: #ffffff;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #eee;
-      }
-    }
-  }
 }
 

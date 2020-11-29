@@ -2,6 +2,8 @@ import React from 'react';
 import s from './MyPosts.module.scss'
 import Post from "./Post/Post";
 import Ava from "../../../assets/Ava.png";
+import {addPostActionCreator, catchPostTextActionCreator} from "../../../redux/state";
+
 
 const MyPosts = (props) => {
 
@@ -10,11 +12,13 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef();
 
     let addPost = () => {
-        props.dispatch({type: 'ADD-POST'});
+        props.dispatch(addPostActionCreator());
     }
 
     let onPostChange = () => {
-        props.dispatch({type: 'CATCH-POST-TEXT', typedPost: newPostElement.current.value})
+        let text = newPostElement.current.value
+        let action = catchPostTextActionCreator(text);
+        props.dispatch(action)
     }
 
     return (

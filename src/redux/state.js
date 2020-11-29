@@ -1,5 +1,11 @@
 import Ava from '../assets/Ava.png'
 
+const ADD_POST = 'ADD-POST'
+const ADD_MESSAGE = 'ADD-MESSAGE'
+
+const CATCH_POST_TEXT = 'CATCH-POST-TEXT'
+const CATCH_MESSAGE_TEXT = 'CATCH-MESSAGE-TEXT'
+
 let store = {
     _state: {
         profilePage: {
@@ -11,7 +17,7 @@ let store = {
             newPostText: ''
         },
         messagesPage: {
-            dialogData: [
+            contactData: [
                 {id: 1, name: 'Alex', avatar: Ava},
                 {id: 2, name: 'Doodie', avatar: Ava},
                 {id: 3, name: 'Moodie', avatar: Ava},
@@ -22,7 +28,8 @@ let store = {
                 {id: 1, text: 'Sup homie! How are you doing with ur react stuff? Are u done for today?'},
                 {id: 2, text: 'Ain\'t ya doing ur app or smth?'},
                 {id: 3, text: 'Wanna drink this evening?'}
-            ]
+            ],
+            newMessageText: ''
         },
         sidebar: {
             friends: [
@@ -46,20 +53,48 @@ let store = {
     },
 
     dispatch(action){
-        if( action.type === 'ADD-POST' ){
-            let newPost = {
-                id: 4,
-                message: this._state.profilePage.newPostText,
-                likesCounter: 0
-            };
-            this._state.profilePage.postData.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === 'CATCH-POST-TEXT') {
-            this._state.profilePage.newPostText = action.typedPost;
-            this._callSubscriber(this._state);
+        switch(action.type) {
+            case ADD_POST:
+                let newPost = {
+                    id: 4,
+                    message: this._state.profilePage.newPostText,
+                    likesCounter: 0
+                };
+                this._state.profilePage.postData.push(newPost);
+                this._state.profilePage.newPostText = '';
+                this._callSubscriber(this._state);
+                break;
+
+            case CATCH_POST_TEXT:
+                this._state.profilePage.newPostText = action.typedPost;
+                this._callSubscriber(this._state);
+                break;
+
+            case ADD_MESSAGE:
+                let newMessage = {
+                    id: 4,
+                    text: this._state.messagesPage.newMessageText
+                };
+                this._state.messagesPage.messageData.push(newMessage);
+                this._state.messagesPage.newMessageText = '';
+                this._callSubscriber(this._state);
+                break;
+
+            case CATCH_MESSAGE_TEXT:
+                this._state.messagesPage.newMessageText = action.typedMessage;
+                this._callSubscriber(this._state);
+                break;
+
+            default:
+                throw new Error('There is no function with such type in dispatcher')
         }
     }
 }
+
+export const addPostActionCreator = () => ({type: ADD_POST})    //такая запись означает "return{type: ADD_POST}"
+export const catchPostTextActionCreator = (text) => ({type: CATCH_POST_TEXT, typedPost: text})
+
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
+export const catchMessageTextActionCreator = (text) => ({type: CATCH_MESSAGE_TEXT, typedMessage: text})
 
 export default store;

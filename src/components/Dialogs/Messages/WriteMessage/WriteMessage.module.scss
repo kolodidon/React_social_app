@@ -1,0 +1,29 @@
+.writeMessage {
+  width: calc(100% - 30px);
+  padding: 15px;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  background-color: #4A76A8;
+
+  .writeMessageTextarea {
+    height: 100%;
+    flex-grow: 1;
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px;
+    border: none;
+    resize: none;
+    margin-right: 15px;
+  }
+  .writeMessageButton {
+    width: 8%;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #eee;
+    }
+  }
+}
