@@ -1,9 +1,9 @@
 import React from 'react';
 import s from './Profile.module.scss'
 import Background from "../../assets/BC.png";
-import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import Ava from "../../assets/Ava.png";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 const Profile = (props) => {
     return (
@@ -12,7 +12,8 @@ const Profile = (props) => {
 
             <ProfileInfo avatar={Ava} firstName='Doodie' surname="Moodie" position="Junior Web-developer" workPlace="Konvertraf LLC"/>
 
-            <MyPosts postData={props.data.postData} dispatch={props.dispatch} newPostText={props.data.newPostText}/>
+            <MyPostsContainer store={props.store}/>
+
         </main>
     )
 }

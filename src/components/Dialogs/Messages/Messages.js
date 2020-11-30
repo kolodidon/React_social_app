@@ -1,16 +1,18 @@
 import React from 'react'
 import s from './Messages.module.scss'
 import MessagesList from "./MessageList/MessagesList";
-import WriteMessage from "./WriteMessage/WriteMessage";
+import WriteMessageContainer from "./WriteMessage/WriteMessageContainer";
 
 const Messages = (props) => {
+
+    let state = props.store.getState()
 
     return(
         <div className = {s.messages}>
 
-            <MessagesList data={props.data}/>
+            <MessagesList data={state.messagesPage.messageData}/>
 
-            <WriteMessage newMessageText={props.newMessageText} dispatch={props.dispatch}/>
+            <WriteMessageContainer store={props.store}/>
 
         </div>
     )

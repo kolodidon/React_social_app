@@ -5,12 +5,14 @@ import Messages from "./Messages/Messages";
 
 const Dialogs = (props) => {
 
+    let state = props.store.getState()
+
     return (
         <div className={s.dialogsWrapper}>
 
-            <Contacts data={props.data.contactData}/>
+            <Contacts data={state.messagesPage.contactData}/>
 
-            <Messages data={props.data.messageData} newMessageText={props.data.newMessageText} dispatch={props.dispatch}/>
+            <Messages store={props.store}/>
 
         </div>
     )
