@@ -1,7 +1,16 @@
 const ADD_POST = 'ADD-POST'
 const CATCH_POST_TEXT = 'CATCH-POST-TEXT'
 
-const profileReducer = (state, action) => {
+let initialState = {
+    postData: [
+        {id: 1, message: 'Whassaup homie!', likesCounter: 25},
+        {id: 2, message: 'Hawaya doin here?', likesCounter: 10},
+        {id: 3, message: 'Exdee git rect', likesCounter: 6}
+    ],
+    newPostText: ''
+}
+
+const profileReducer = (state = initialState, action) => {
 
     switch(action.type) {
         case ADD_POST:

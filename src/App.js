@@ -10,9 +10,7 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 
 const App = (props) => {
-
     return (
-
             <div className='app-wrapper'>
 
                 {/*Header*/}
