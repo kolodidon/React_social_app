@@ -19,11 +19,15 @@
     width: 8%;
     background-color: #ffffff;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
 
     &:hover {
       background-color: #eee;
     }
   }
+}
+
+.messagesList {
+  max-width: 30%;
 }

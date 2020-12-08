@@ -22,7 +22,10 @@ const App = (props) => {
                 {/*Сontent*/}
                 <div className="app-wrapper-content">
 
-                    <Route exact path="/" render={  () => <Profile store={props.store}/> }/>
+                    {/*<Route exact path="/" render={  () => <Profile store={props.store}/> }/>*/}
+                    {/*<Route path="/dialogs" render={  () => <Dialogs store={props.store}/> }/>*/}
+
+                    <Route exact path="/" render={  () => <Profile/> }/>
                     <Route path="/dialogs" render={  () => <Dialogs store={props.store}/> }/>
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>

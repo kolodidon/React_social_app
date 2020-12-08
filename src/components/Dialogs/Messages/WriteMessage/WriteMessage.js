@@ -1,7 +1,10 @@
 import React from 'react'
 import s from './WriteMessage.module.scss'
+import Message from "../MessageList/Message/Message";
 
 const WriteMessage = (props) => {
+
+    let messageElements = props.messageData.map(message => <Message key={message.id} id={message.id} text={message.text}/>)
 
     let newMessageElement = React.createRef();
 
@@ -15,10 +18,16 @@ const WriteMessage = (props) => {
     }
 
     return (
-        <div className={s.writeMessage}>
-            <textarea onChange={MessageChange} ref={newMessageElement} value={props.newMessageText} placeholder='Type your message...' className={s.writeMessageTextarea}></textarea>
-            <button onClick={addMessage} className={s.writeMessageButton} type="submit">Post</button>
-        </div>
+        <React.Fragment>
+            <div className={s.messagesList}>
+                {messageElements}
+            </div>
+
+            <div className={s.writeMessage}>
+                <textarea onChange={MessageChange} ref={newMessageElement} value={props.newMessageText} placeholder='Type your message...' className={s.writeMessageTextarea}></textarea>
+                <button onClick={addMessage} className={s.writeMessageButton} type="submit">Post</button>
+            </div>
+        </React.Fragment>
     )
 }
 

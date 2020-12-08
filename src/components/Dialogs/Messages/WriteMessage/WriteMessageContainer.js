@@ -1,24 +1,26 @@
-import React from 'react'
 import {addMessageActionCreator, catchMessageTextActionCreator} from "../../../../redux/dialogs-reducer";
 import WriteMessage from "./WriteMessage";
+import {connect} from "react-redux";
 
 
-const WriteMessageContainer = (props) => {
-
-    let state = props.store.getState()
-
-    let addMessage = () => {
-        props.store.dispatch(addMessageActionCreator());
+let mapStateToProps = (state) => {
+    return {
+        newMessageText: state.messagesPage.newMessageText,
+        messageData: state.messagesPage.messageData
     }
-
-    let onMessageChange = (text) => {
-        let action = catchMessageTextActionCreator(text)
-        props.store.dispatch(action)
-    }
-
-    return (
-        <WriteMessage newMessageText={state.messagesPage.newMessageText} onAddMessage={addMessage} onMessageChange={onMessageChange} />
-    )
 }
+
+let mapDispatchToProps = (dispatch) => {
+    return {
+        onAddMessage: () => {
+            dispatch(addMessageActionCreator());
+        },
+        onMessageChange: (text) => {
+            dispatch(catchMessageTextActionCreator(text))
+        }
+    }
+}
+
+const WriteMessageContainer = connect(mapStateToProps, mapDispatchToProps)(WriteMessage);
 
 export default WriteMessageContainer

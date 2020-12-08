@@ -12,7 +12,9 @@ const Profile = (props) => {
 
             <ProfileInfo avatar={Ava} firstName='Doodie' surname="Moodie" position="Junior Web-developer" workPlace="Konvertraf LLC"/>
 
-            <MyPostsContainer store={props.store}/>
+            <MyPostsContainer/>
+
+            {/*<MyPostsContainer store={props.store}/>*/}
 
         </main>
     )
