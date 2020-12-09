@@ -1,4 +1,4 @@
-import Ava from "../assets/Ava.png";
+import Ava from '../assets/Ava.png'
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
 const CATCH_MESSAGE_TEXT = 'CATCH-MESSAGE-TEXT'

@@ -9,6 +9,7 @@ const Sidebar = (props) => {
             <nav>
                 <NavLink activeClassName = {s.active} exact to="/">Profile</NavLink>
                 <NavLink activeClassName = {s.active} to="/dialogs">Dialogs</NavLink>
+                <NavLink activeClassName = {s.active} to="/users">Users</NavLink>
                 <NavLink activeClassName = {s.active} to="/news">News</NavLink>
                 <NavLink activeClassName = {s.active} to="/music">Music</NavLink>
                 <NavLink activeClassName = {s.active} to="/settings">Settings</NavLink>
