@@ -11,7 +11,7 @@ const Profile = (props) => {
             <div className={s.background} style={{backgroundImage: "url(" + Background + ")"}}/>
 
             <ProfileInfo avatar={Ava} firstName='Doodie' surname="Moodie" position="Junior Web-developer" workPlace="Konvertraf LLC"/>
-
+            
             <MyPostsContainer/>
 
             {/*<MyPostsContainer store={props.store}/>*/}
