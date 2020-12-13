@@ -7,3 +7,24 @@
   width: 150px;
   height: 150px;
 }
+
+.pagBtn {
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 7px;
+  display: inline-block;
+  border-radius: 5px;
+  background-color: #4A76A8;
+  color: white;
+  cursor: pointer;
+  &:hover {
+    color: gold;
+  }
+  &.selectedPage {
+    color: gold;
+  }
+}
+.pagCont {
+  text-align: center;
+  margin: 10px 0 10px 0;
+}
