@@ -12,7 +12,7 @@ const Dialogs = (props) => {
 
             <Contacts data={state.messagesPage.contactData}/>
 
-            <Messages store={props.store}/>
+            <Messages/>
 
         </div>
     )

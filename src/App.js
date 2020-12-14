@@ -19,7 +19,7 @@ const App = (props) => {
                 <Header/>
 
                 {/*Sidebar*/}
-                <Sidebar data={props.state.sidebar}/>
+                <Sidebar data={props.store.getState().sidebar}/>
 
                 {/*Сontent*/}
                 <div className="app-wrapper-content">
