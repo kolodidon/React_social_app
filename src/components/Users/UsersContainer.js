@@ -9,19 +9,27 @@ import Preloader from '../common/Preloader/Preloader';
 class UsersComponent extends React.Component {
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(responce => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(responce.data.items);
-            responce.data.totalCount > 100 ? this.props.setTotalUsersCount(100) : this.props.setTotalUsersCount(responce.data.totalCount);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, 
+        {
+            withCredentials: true
         })
+            .then(responce => {
+                this.props.toggleIsFetching(false)
+                this.props.setUsers(responce.data.items);
+                responce.data.totalCount > 100 ? this.props.setTotalUsersCount(100) : this.props.setTotalUsersCount(responce.data.totalCount);
+            })
     }
     changeCurrentPage = (page) => {
         this.props.setPage(page)
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(responce => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(responce.data.items)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, 
+        {
+            withCredentials: true
         })
+            .then(responce => {
+                this.props.toggleIsFetching(false)
+                this.props.setUsers(responce.data.items)
+            })
     }
     render() {
         return (
