@@ -5,11 +5,19 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 const Profile = (props) => {
+
     return (
         <main className={s.profile}>
             <div className={s.background} style={{backgroundImage: "url(" + Background + ")"}}/>
 
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo 
+                profile={props.profile} 
+                status={props.status} 
+                isAuth={props.isAuth} 
+                userId={props.match.params.userId}
+                setUserStatus={props.setUserStatus}
+                changeUserStatusThunkCreator={props.changeUserStatusThunkCreator}
+            />
             
             <MyPostsContainer/>
 

@@ -4,7 +4,7 @@ import Contact from "./Contact/Contact";
 
 const Contacts = (props) => {
 
-    let contactsElements = props.data.map( contact => <Contact key={contact.id} id={contact.id} name={contact.name} avatar={contact.avatar}/>)
+    let contactsElements = props.contactData.map( contact => <Contact key={contact.id} id={contact.id} name={contact.name} avatar={contact.avatar}/>)
 
     return(
         <div className={s.contacts}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Preloader from '../../common/Preloader/Preloader';
 import s from './ProfileInfo.module.scss'
+import ProfileStatus from './ProfileStatus/ProfileStatus';
 
 
 const ProfileInfo = (props) => {
@@ -18,6 +19,16 @@ const ProfileInfo = (props) => {
                         <p>{props.profile.aboutMe}</p>
                         <p>{(props.profile.lookingForAJob) ? 'Ищу работу' : 'Не ищу работу'}</p>
                         <p>{props.profile.lookingForAJobDescription}</p>
+                </span>
+
+                <span>
+                    <ProfileStatus
+                        status={props.status}
+                        userId={props.userId}
+                        isAuth={props.isAuth}
+                        setUserStatus={props.setUserStatus}
+                        changeUserStatusThunkCreator={props.changeUserStatusThunkCreator}
+                    />
                 </span>
                 
                 <span>

@@ -1,19 +1,26 @@
 import React from 'react'
 import s from './Dialogs.module.scss'
 import Contacts from "./Contacts/Contacts";
-import Messages from "./Messages/Messages";
+import WriteMessage from "./Messages/WriteMessage/WriteMessage"
+import { Redirect } from 'react-router-dom';
 
 const Dialogs = (props) => {
 
-    let state = props.store.getState()
+    if (!props.isAuth) return <Redirect to={"/login"}/>
 
     return (
         <div className={s.dialogsWrapper}>
 
-            <Contacts data={state.messagesPage.contactData}/>
+            <Contacts contactData={props.contactData}/>
 
-            <Messages/>
-
+            <div className = {s.messages}>
+                <WriteMessage 
+                    messageData={props.messageData} 
+                    newMessageText={props.newMessageText} 
+                    onMessageChange={props.onMessageChange}
+                    onAddMessage={props.onAddMessage}
+                />
+            </div>
         </div>
     )
 }
