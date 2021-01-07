@@ -12,23 +12,23 @@ class ProfileContainer extends React.Component {
     componentDidMount(){
         let userId = this.props.match.params.userId;
         if (!userId) { 
-            userId = 13254;
+            userId = this.props.id;
         }
         this.props.getUserProfileThunkCreator(userId);
         this.props.getUserStatusThunkCreator(userId);
     }
-    componentDidUpdate(){
+    render(){
         let userId = this.props.match.params.userId;
         if (!userId) { 
-            userId = 13254;
+            userId = this.props.id;
         }
-    }
-    render(){
         return (
             <>
                 {this.props.isFetching ? <Preloader/> : null}
                 <Profile 
                     { ...this.props }
+                    userId={userId}
+                    myId={this.props.id}
                 />
             </>
         )
@@ -39,6 +39,7 @@ let mapStateToProps = (state) => {
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
+        id: state.auth.id
     }
 }
 

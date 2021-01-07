@@ -1,7 +1,6 @@
 import Ava from '../assets/Ava.png'
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
-const CATCH_MESSAGE_TEXT = 'CATCH-MESSAGE-TEXT'
 
 let initialState = {
     contactData: [
@@ -15,26 +14,16 @@ let initialState = {
         {id: 1, text: 'Sup homie! How are you doing with ur react stuff? Are u done for today?'},
         {id: 2, text: 'Ain\'t ya doing ur app or smth?'},
         {id: 3, text: 'Wanna drink this evening?'}
-    ],
-    newMessageText: ''
+    ]
 }
 
 const dialogsReducer = (state = initialState, action) => {
 
     switch (action.type) {
-
-        case CATCH_MESSAGE_TEXT:
-            return {
-                ...state,
-                newMessageText: action.typedMessage
-            }
-
         case ADD_MESSAGE:
-            let newMessageText = state.newMessageText
             return {
                 ...state,
-                newMessageText: '',
-                messageData: [...state.messageData, {id: 5, text: newMessageText}]
+                messageData: [...state.messageData, {id: 5, text: action.messageText}]
             }
 
         default:
@@ -42,7 +31,6 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
-export const catchMessageTextActionCreator = (text) => ({type: CATCH_MESSAGE_TEXT, typedMessage: text})
+export const addMessageActionCreator = (messageText) => ({type: ADD_MESSAGE, messageText})
 
 export default dialogsReducer

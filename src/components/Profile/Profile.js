@@ -14,7 +14,8 @@ const Profile = (props) => {
                 profile={props.profile} 
                 status={props.status} 
                 isAuth={props.isAuth} 
-                userId={props.match.params.userId}
+                userId={props.userId}
+                myId={props.myId}
                 setUserStatus={props.setUserStatus}
                 changeUserStatusThunkCreator={props.changeUserStatusThunkCreator}
             />

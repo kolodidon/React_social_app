@@ -11,7 +11,9 @@ const Header = (props) => {
                 <span>Another React App</span>
             </div>
             <div className={s.loginBlock}>
-                {(props.isAuth) ? props.login + ' ' + props.email : <NavLink to={'/login'}>Login</NavLink>}
+                {(props.isAuth) 
+                    ? <div>{props.login + ' ' + props.email}<button onClick={props.logoutUserThunkCreator}>Logout</button></div>
+                    : <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </header>
     )

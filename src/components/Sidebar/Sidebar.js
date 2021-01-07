@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Sidebar.module.scss'
 import {NavLink} from "react-router-dom";
 import Friends from "./Friends/Friends";
+import {connect} from "react-redux";
 
 const Sidebar = (props) => {
     return (
@@ -14,9 +15,17 @@ const Sidebar = (props) => {
                 <NavLink activeClassName = {s.active} to="/music">Music</NavLink>
                 <NavLink activeClassName = {s.active} to="/settings">Settings</NavLink>
             </nav>
-            <Friends data={props.data}/>
+            <Friends friends={props.friends}/>
         </aside>
     )
 }
 
-export default Sidebar
+const mapStateToProps = (state) => {
+    return({
+        friends: state.sidebar.friends
+    })
+}
+
+const actionCreators = null
+
+export default connect(mapStateToProps, actionCreators)(Sidebar);

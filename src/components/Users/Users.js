@@ -2,27 +2,22 @@ import React from 'react'
 import s from './Users.module.scss'
 import Ava from "../../assets/Ava.png";
 import { NavLink } from 'react-router-dom';
+import Paginator from  './Paginator'
 
 let Users = (props) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
+
     return (
         (
             <div>
-                <div className={s.pagCont}>
-                    {pages.map(page => {
-                        return (
-                            <span
-                                key={page}
-                                onClick={() => { props.changeCurrentPage(page) }}
-                                className={(props.currentPage === page) ? `${s.selectedPage} ${s.pagBtn}` : `${s.pagBtn}`}>{page}
-                            </span>
-                        )
-                    })}
-                </div>
+                <Paginator 
+                    totalUsersCount={props.totalUsersCount} 
+                    pageSize={props.pageSize} 
+                    changeCurrentPage={props.changeCurrentPage} 
+                    currentPage={props.currentPage} 
+                    portionSize={props.portionSize} 
+                    styles={s} 
+                />
+
                 <div className={s.main}>
                     {
                         props.users.map(u => <div key={u.id}>

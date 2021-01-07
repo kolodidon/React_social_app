@@ -31,6 +31,23 @@ export const usersAPI = {
             axiosInstance.get(`auth/me`)
             .then(responce => responce.data)
         )
+    },
+    loginUser(email, password, rememberMe, captcha){
+        return(
+            axiosInstance.post(`auth/login/`, { email, password, rememberMe, captcha })
+            .then(responce => responce.data)
+        )
+    },
+    logoutUser(){
+        return(
+            axiosInstance.delete(`auth/login/`)
+        )
+    },
+    getCaptcha(){
+        return(
+            axiosInstance.get(`security/get-captcha-url`)
+            .then(responce => responce.data)
+        )
     }
 }
 export const profileAPI = {

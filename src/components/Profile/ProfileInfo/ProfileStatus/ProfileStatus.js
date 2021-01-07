@@ -47,8 +47,8 @@ class ProfileStatus extends React.Component{
         } else {
             return (
                 <>
-                    <div><span>{this.props.status || "Set status"}</span></div>
-                    { ( (!this.props.userId) && (this.props.isAuth) ) ? <div><button onClick={this.toggleEdit}>Редактировать</button></div> : null }
+                    <div><span>{this.props.status}</span></div>
+                    { ( (!this.props.userId) && (this.props.isAuth) ) ? <button onClick={this.toggleEdit}>Редактировать</button> : null }
                 </>
             ) 
         }

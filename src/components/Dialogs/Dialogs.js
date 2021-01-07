@@ -17,7 +17,6 @@ const Dialogs = (props) => {
                 <WriteMessage 
                     messageData={props.messageData} 
                     newMessageText={props.newMessageText} 
-                    onMessageChange={props.onMessageChange}
                     onAddMessage={props.onAddMessage}
                 />
             </div>

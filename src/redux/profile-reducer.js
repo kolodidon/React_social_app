@@ -1,7 +1,7 @@
 import { profileAPI } from '../api/api'
 
 const ADD_POST = 'ADD-POST'
-const CATCH_POST_TEXT = 'CATCH-POST-TEXT'
+const DELETE_POST = 'DELETE-POST'
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
 const SET_STATUS = 'CHANGE-STATUS'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
@@ -13,7 +13,6 @@ let initialState = {
         {id: 3, message: 'Exdee git rect', likesCounter: 6}
     ],
     profile: null,
-    newPostText: '',
     status: '',
     isFetching: false
 }
@@ -24,14 +23,13 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST: {
             return {
                 ...state,
-                newPostText: '',
-                postData: [...state.postData, { id: 4, message: state.newPostText, likesCounter: 0 }]
+                postData: [...state.postData, { id: 4, message: action.postText, likesCounter: 0 }]
             }
         }
-        case CATCH_POST_TEXT: {
+        case DELETE_POST: {
             return {
                 ...state,
-                newPostText: action.typedPost
+                postData: [...state.postData.filter(p => p.id !== action.postId)]
             }
         }
         case SET_USER_PROFILE: {
@@ -56,8 +54,8 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST})
-export const catchPostTextActionCreator = (text) => ({type: CATCH_POST_TEXT, typedPost: text})
+export const addPostActionCreator = (postText) => ({type: ADD_POST, postText})
+export const deletePostActionCreator = (postId) => ({type: DELETE_POST, postId})
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const setUserStatus = (typedStatus) => ({type: SET_STATUS, typedStatus})
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
@@ -68,11 +66,9 @@ export const getUserProfileThunkCreator = (userId) => (dispatch) => {
         dispatch(setUserProfile(responce));
     })
 }
-export const getUserStatusThunkCreator = (userId) => (dispatch) => {
-    profileAPI.getStatus(userId)
-    .then(responce => {
+export const getUserStatusThunkCreator = (userId) => async (dispatch) => {
+    let responce = await profileAPI.getStatus(userId)
         dispatch(setUserStatus(responce))
-    })
 }
 export const changeUserStatusThunkCreator = (statusText) => (dispatch) => {
     profileAPI.changeStatus(statusText)
