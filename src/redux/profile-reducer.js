@@ -5,6 +5,7 @@ const DELETE_POST = 'DELETE-POST'
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
 const SET_STATUS = 'CHANGE-STATUS'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const UPDATE_AVATAR = 'UPDATE_AVATAR'
 
 let initialState = {
     postData: [
@@ -49,6 +50,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 isFetching: action.isFetching
             }
+        case UPDATE_AVATAR:
+            return{
+                ...state,
+                profile: {...state.profile, photos: action.photos}
+            }
         default:
             return state;
     }
@@ -59,6 +65,7 @@ export const deletePostActionCreator = (postId) => ({type: DELETE_POST, postId})
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const setUserStatus = (typedStatus) => ({type: SET_STATUS, typedStatus})
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
+export const updateAvatar = (photos) => ({ type: UPDATE_AVATAR, photos })
 
 
 export const getUserProfileThunkCreator = (userId) => (dispatch) => {
@@ -77,5 +84,9 @@ export const changeUserStatusThunkCreator = (statusText) => (dispatch) => {
                 dispatch(setUserStatus(statusText))
             }
         })
+}
+export const sendAvatarThunkCreator = (image) => async (dispatch) => {
+    let responce = await profileAPI.sendAvatar(image)
+    dispatch(updateAvatar(responce.data.data.photos))
 }
 export default profileReducer

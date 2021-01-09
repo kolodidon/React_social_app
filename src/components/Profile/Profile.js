@@ -18,6 +18,7 @@ const Profile = (props) => {
                 myId={props.myId}
                 setUserStatus={props.setUserStatus}
                 changeUserStatusThunkCreator={props.changeUserStatusThunkCreator}
+                sendAvatarThunkCreator={props.sendAvatarThunkCreator}
             />
             
             <MyPostsContainer/>

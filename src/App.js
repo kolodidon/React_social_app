@@ -14,6 +14,7 @@ import { initialize } from '../src/redux/app-reducer'
 import Preloader from './components/common/Preloader/Preloader';
 import store from './redux/redux-store';
 import { BrowserRouter } from "react-router-dom";
+// import { HashRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { withSuspence } from "./hoc/withSuspence";
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
@@ -54,11 +55,13 @@ const actionCreators = { initialize }
 const AppContainer =  connect(mapStateToProps, actionCreators)(App);
 const MyApp = (props) => {
     return(
+        // <HashRouter>
         <BrowserRouter>
             <Provider store={store}>
                 <AppContainer/>
             </Provider>
         </BrowserRouter>
+        //</HashRouter>
     )
 }
 

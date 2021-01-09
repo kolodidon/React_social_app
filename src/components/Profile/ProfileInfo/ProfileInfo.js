@@ -2,6 +2,8 @@ import React from 'react';
 import Preloader from '../../common/Preloader/Preloader';
 import s from './ProfileInfo.module.scss'
 import ProfileStatusWithHooks from './ProfileStatus/ProfileStatusWithHooks';
+import Ava from '../../../assets/Ava.png'
+import UploadAvatar from './UploadAvatar/UploadAvatar'
 
 
 const ProfileInfo = (props) => {
@@ -13,7 +15,7 @@ const ProfileInfo = (props) => {
 
     return (
             <div className={s.author}>
-                <img src={props.profile.photos.large} alt="Avatar"/>
+                <img src={props.profile.photos.large || Ava} alt="Avatar"/>
                 <span>
                         {props.profile.fullName}
                         <p>{props.profile.aboutMe}</p>
@@ -31,6 +33,15 @@ const ProfileInfo = (props) => {
                         changeUserStatusThunkCreator={props.changeUserStatusThunkCreator}
                     />
                 </span>
+
+                <span>
+                    <UploadAvatar
+                        userId={props.userId}
+                        isAuth={props.isAuth}
+                        myId={props.myId}
+                        sendAvatarThunkCreator={props.sendAvatarThunkCreator}
+                    />
+                </span>
                 
                 <span>
                     Контакты:
@@ -43,7 +54,6 @@ const ProfileInfo = (props) => {
                     {(props.profile.contacts.website) ? <p>Website: {props.profile.contacts.website}</p> : null }
                     {(props.profile.contacts.youtube) ? <p>Youtube: {props.profile.contacts.youtube}</p> : null }
                 </span>
-
             </div>
     )
 }

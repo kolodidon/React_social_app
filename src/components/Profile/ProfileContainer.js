@@ -2,7 +2,7 @@ import React from 'react';
 import Profile from './Profile'
 import {connect} from "react-redux";
 import { withRouter } from 'react-router-dom';
-import {getUserProfileThunkCreator, getUserStatusThunkCreator, changeUserStatusThunkCreator, setUserStatus} from '../../redux/profile-reducer'
+import {getUserProfileThunkCreator, getUserStatusThunkCreator, changeUserStatusThunkCreator, setUserStatus, sendAvatarThunkCreator} from '../../redux/profile-reducer'
 import {withAuthRedirect} from '../../hoc/withAuthRedirect'
 import { compose } from 'redux';
 import Preloader from '../common/Preloader/Preloader';
@@ -43,6 +43,6 @@ let mapStateToProps = (state) => {
     }
 }
 
-let actionCreators = {getUserProfileThunkCreator, getUserStatusThunkCreator, changeUserStatusThunkCreator, setUserStatus}
+let actionCreators = {getUserProfileThunkCreator, getUserStatusThunkCreator, changeUserStatusThunkCreator, setUserStatus, sendAvatarThunkCreator}
 
 export default compose(withRouter, connect(mapStateToProps, actionCreators), withAuthRedirect)(ProfileContainer)
