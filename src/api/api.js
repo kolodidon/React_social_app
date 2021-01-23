@@ -79,5 +79,25 @@ export const profileAPI = {
                 }
             })
         )
-    }
+    },
+    sendInfo(info){
+        return(
+            axiosInstance.put(`profile/`, { 
+                "aboutMe": info.aboutMe,
+                "contacts": {
+                    facebook: info.facebook,
+                    github: info.github,
+                    instagram: info.instagram,
+                    mainLink: info.mainLink,
+                    twitter: info.twitter,
+                    vk: info.vk,
+                    website: info.website,
+                    youtube: info.youtube
+                },
+                "lookingForAJob": info.lookingForAJob,
+                "lookingForAJobDescription": info.lookingForAJobDescription,
+                "fullName": info.fullName
+            })
+        )
+    },
 }

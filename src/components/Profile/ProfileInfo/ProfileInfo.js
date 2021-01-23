@@ -4,6 +4,7 @@ import s from './ProfileInfo.module.scss'
 import ProfileStatusWithHooks from './ProfileStatus/ProfileStatusWithHooks';
 import Ava from '../../../assets/Ava.png'
 import UploadAvatar from './UploadAvatar/UploadAvatar'
+import UploadInfo from './UploadInfo/UploadInfo'
 
 
 const ProfileInfo = (props) => {
@@ -44,18 +45,22 @@ const ProfileInfo = (props) => {
                 </span>
                 
                 <span>
+                    <UploadInfo
+                        userId={props.userId}
+                        isAuth={props.isAuth}
+                        myId={props.myId}
+                        sendInfoThunkCreator={props.sendInfoThunkCreator}
+                    />
+                </span>
+                <span>
                     Контакты:
-                    {(props.profile.contacts.facebook) ? <p>Facebook: {props.profile.contacts.facebook}</p> : null }
-                    {(props.profile.contacts.github) ? <p>GitHub: {props.profile.contacts.github}</p> : null }
-                    {(props.profile.contacts.instagram) ? <p>Instagram: {props.profile.contacts.instagram}</p> : null }
-                    {(props.profile.contacts.mainLink) ? <p>Link: {props.profile.contacts.mainLink}</p> : null }
-                    {(props.profile.contacts.twitter) ? <p>Twitter: {props.profile.contacts.twitter}</p> : null }
-                    {(props.profile.contacts.vk) ? <p>VK: {props.profile.contacts.vk}</p> : null }
-                    {(props.profile.contacts.website) ? <p>Website: {props.profile.contacts.website}</p> : null }
-                    {(props.profile.contacts.youtube) ? <p>Youtube: {props.profile.contacts.youtube}</p> : null }
+                    {Object.keys(props.profile.contacts).map(key => {
+                        return (props.profile.contacts[key]) ? <p key={key}>{key}: {props.profile.contacts[key]}</p> : null ;
+                    })}
                 </span>
             </div>
     )
 }
 
 export default ProfileInfo
+

@@ -6,6 +6,7 @@ const SET_USER_PROFILE = 'SET-USER-PROFILE'
 const SET_STATUS = 'CHANGE-STATUS'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const UPDATE_AVATAR = 'UPDATE_AVATAR'
+const UPDATE_INFO = 'UPDATE_INFO'
 
 let initialState = {
     postData: [
@@ -55,6 +56,26 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 profile: {...state.profile, photos: action.photos}
             }
+        case UPDATE_INFO:
+            return{
+                ...state,
+                 profile: {...state.profile, 
+                    aboutMe: action.info.aboutMe,
+                    lookingForAJob: action.info.lookingForAJob,
+                    lookingForAJobDescription: action.info.lookingForAJobDescription,
+                    fullName: action.info.fullName,
+                    contacts: {...state.profile.contacts,
+                        facebook: action.info.facebook,
+                        website: action.info.website,
+                        vk: action.info.vk,
+                        twitter: action.info.twitter,
+                        instagram: action.info.instagram,
+                        youtube: action.info.youtube,
+                        github: action.info.github,
+                        mainLink: action.info.mainLink
+                    }
+                }
+            }    
         default:
             return state;
     }
@@ -66,6 +87,7 @@ export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const setUserStatus = (typedStatus) => ({type: SET_STATUS, typedStatus})
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
 export const updateAvatar = (photos) => ({ type: UPDATE_AVATAR, photos })
+export const updateInfo = (info) => ({ type: UPDATE_INFO, info })
 
 
 export const getUserProfileThunkCreator = (userId) => (dispatch) => {
@@ -86,7 +108,21 @@ export const changeUserStatusThunkCreator = (statusText) => (dispatch) => {
         })
 }
 export const sendAvatarThunkCreator = (image) => async (dispatch) => {
-    let responce = await profileAPI.sendAvatar(image)
-    dispatch(updateAvatar(responce.data.data.photos))
+    try{
+        let responce = await profileAPI.sendAvatar(image)
+        if (responce.resultCode === 0) {
+            dispatch(updateAvatar(responce.data.data.photos))
+        }
+    }
+    catch(error){
+        console.log(`Shit is wrong man, here is your error message: ${error}`)
+    }
+}
+export const sendInfoThunkCreator = (info) => async (dispatch) => {
+    let responce = await profileAPI.sendInfo(info)
+    if (responce.data.resultCode === 0) {
+        dispatch(updateInfo(info))
+    }
+    
 }
 export default profileReducer

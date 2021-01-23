@@ -49,7 +49,7 @@ const LoginForm = (props) => {
                 <div className={s.loginForm}>
                     {props.errorMessage && <p className={(props.errorMessage === "Logged Successful!") ? s.success : s.error}>{props.errorMessage}</p>}
                     
-                    <label htmlFor={"email"}>Email</label>
+                    <label for={"email"}>Email</label>
                     <input
                         type={"text"}
                         name={"email"}
@@ -59,7 +59,7 @@ const LoginForm = (props) => {
                     />
                     {touched.email && errors.email && <p className={s.error}>{errors.email}</p>}
 
-                    <label htmlFor={"password"}>Password</label>
+                    <label for={"password"}>Password</label>
                     <input
                         type={"password"}
                         name={"password"}
@@ -69,7 +69,7 @@ const LoginForm = (props) => {
                     />
                     {touched.password && errors.password && <p className={s.error}>{errors.password}</p>}
 
-                    <label htmlFor={"remember"}>Remember me
+                    <label for={"remember"}>Remember me
                         <input
                             type={"checkbox"}
                             name={"remember"}
@@ -81,7 +81,7 @@ const LoginForm = (props) => {
 
                     {
                     props.captchaUrl && 
-                        <label htmlFor={"captcha"}>Captcha
+                        <label for={"captcha"}>Captcha
                         <input
                             type={"text"}
                             name={"captcha"}
@@ -97,7 +97,7 @@ const LoginForm = (props) => {
                         disabled={!isValid && !dirty}
                         onClick={handleSubmit}
                         type={'submit'}
-                    >Отправить
+                    >Login
                     </button>
                 </div>
             )}
