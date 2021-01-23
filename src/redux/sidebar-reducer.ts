@@ -1,6 +1,10 @@
 import Ava from "../assets/Ava.png";
 
-let initialState = {
+type initialStateType = {
+    friends: Array<{id: number, name: string, surname: string, avatar: any}>
+}
+
+let initialState: initialStateType = {
     friends: [
         {id: 1, name: 'Viktor', surname: 'Doodiev', avatar: Ava },
         {id: 2, name: 'Piter', surname: 'Parker', avatar: Ava },
@@ -10,7 +14,7 @@ let initialState = {
     ]
 }
 
-const sidebarReducer = (state = initialState, action) => {
+const sidebarReducer = (state = initialState, action: any) => {
     return state;
 }
 

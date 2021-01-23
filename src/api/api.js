@@ -82,7 +82,8 @@ export const profileAPI = {
     },
     sendInfo(info){
         return(
-            axiosInstance.put(`profile/`, { 
+            axiosInstance.put(`profile/`, {
+                "userId": info.userId,
                 "aboutMe": info.aboutMe,
                 "contacts": {
                     facebook: info.facebook,

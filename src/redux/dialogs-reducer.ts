@@ -1,8 +1,13 @@
 import Ava from '../assets/Ava.png'
 
-const ADD_MESSAGE = 'ADD-MESSAGE'
+const ADD_MESSAGE: string = 'ADD-MESSAGE'
 
-let initialState = {
+type initialStateType = {
+    contactData: Array<{id: number, name: string, avatar: any}>
+    messageData: Array<{id: number, text: string}>
+}
+
+let initialState: initialStateType = {
     contactData: [
         {id: 1, name: 'Alex', avatar: Ava},
         {id: 2, name: 'Doodie', avatar: Ava},
@@ -17,7 +22,7 @@ let initialState = {
     ]
 }
 
-const dialogsReducer = (state = initialState, action) => {
+const dialogsReducer = (state = initialState, action: any): initialStateType => {
 
     switch (action.type) {
         case ADD_MESSAGE:
@@ -31,6 +36,6 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const addMessageActionCreator = (messageText) => ({type: ADD_MESSAGE, messageText})
-
+type addMessageActionType = {type: typeof ADD_MESSAGE, messageText: string}
+export const addMessageActionCreator = (messageText: string): addMessageActionType => ({type: ADD_MESSAGE, messageText})
 export default dialogsReducer
