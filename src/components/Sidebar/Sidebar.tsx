@@ -3,8 +3,15 @@ import s from './Sidebar.module.scss'
 import {NavLink} from "react-router-dom";
 import Friends from "./Friends/Friends";
 import {connect} from "react-redux";
+import { globalStateType } from '../../redux/redux-store';
+import { friendType } from '../../redux/sidebar-reducer';
 
-const Sidebar = (props) => {
+type mapStateToPropsType = { friends: Array<friendType> }
+type mapDispatchToPropsType = {}
+type ownPropsType = {}
+type PropsType = mapStateToPropsType & mapDispatchToPropsType & ownPropsType
+
+const Sidebar: React.FC<PropsType> = (props) => {
     return (
         <aside className={s.nav}>
             <nav>
@@ -20,12 +27,12 @@ const Sidebar = (props) => {
     )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: globalStateType) => {
     return({
         friends: state.sidebar.friends
     })
 }
 
-const actionCreators = null
+const actionCreators = {}
 
-export default connect(mapStateToProps, actionCreators)(Sidebar);
+export default connect<mapStateToPropsType, mapDispatchToPropsType, ownPropsType, globalStateType>(mapStateToProps, actionCreators)(Sidebar);

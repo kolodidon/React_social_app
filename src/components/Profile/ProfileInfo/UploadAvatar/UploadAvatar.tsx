@@ -3,20 +3,31 @@ import { Formik } from 'formik';
 import * as yup from 'yup'
 import s from './UploadAvatar.module.scss'
 
-export default function UploadAvatar(props) {
+type PropsType = {
+    userId: number
+    isAuth: boolean
+    myId: number
+    sendAvatarThunkCreator: (image: any) => void
+}
+type FormValuesType = {
+    file: any
+}
+
+const UploadAvatar: React.FC<PropsType> = (props) => {
     let [editMode, setEditMode] = useState(false)
     const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"]
-    const onAvatarUploadSubmit = (file) => {
-        props.sendAvatarThunkCreator(file)
+    const onAvatarUploadSubmit = (image) => {
+        props.sendAvatarThunkCreator(image)
         setEditMode(false)
     }
+    const initialValues: FormValuesType = { file: null }
     if ((props.userId === props.myId) && (props.isAuth)) {
         if (editMode) {
             return (
                 <div className={s.modalBackground}>
                     <div className={s.modalContent}>
                         <Formik
-                            initialValues={{ file: null }}
+                            initialValues={initialValues}
                             onSubmit={(values) => {onAvatarUploadSubmit(values.file)}}
                             validationSchema={yup.object().shape({
                                 file: yup
@@ -29,7 +40,7 @@ export default function UploadAvatar(props) {
                             {({ values, handleSubmit, setFieldValue, touched, errors }) => (
                                 <form onSubmit={handleSubmit}>
                                     <div className="form-group">
-                                        <label for="file">Upload an avatar</label>
+                                        <label htmlFor="file">Upload an avatar</label>
                                         <input 
                                             id="file" 
                                             name="file" 
@@ -60,6 +71,7 @@ export default function UploadAvatar(props) {
     }
 }
 
+
 const Thumb = (props) => {
     let [thumb, setThumb] = useState(undefined)
     let reader = new FileReader();
@@ -77,3 +89,5 @@ const Thumb = (props) => {
         />
     )
 }
+
+export default UploadAvatar

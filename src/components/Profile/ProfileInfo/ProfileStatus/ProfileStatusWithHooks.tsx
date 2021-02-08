@@ -1,14 +1,22 @@
 import React, {useState, useEffect} from 'react'
 //import s from './ProfileStatus.module.scss'
 
-const ProfileStatusWithHooks = (props) => {
+type PropsType = {
+    status: string
+    userId: number | null
+    isAuth: boolean
+    myId: number | null
+    changeUserStatusThunkCreator: (statusText: string) => void
+}
+
+const ProfileStatusWithHooks: React.FC<PropsType> = ({status, userId, isAuth, myId, changeUserStatusThunkCreator}) => {
 
     let [editMode, setEditMode] = useState(false)
-    let [status, setStatus] = useState(props.status)
+    let [localStatus, setStatus] = useState(status)
 
     useEffect( () => {
-        setStatus(props.status)
-    }, [props.status] )
+        setStatus(status)
+    }, [status] )
 
     const toggleEdit = () => {
         setEditMode(true)
@@ -16,10 +24,10 @@ const ProfileStatusWithHooks = (props) => {
 
     const unToggleEdit = () => {
         setEditMode(false)
-        props.changeUserStatusThunkCreator(status)
+        changeUserStatusThunkCreator(localStatus)
     }
 
-    const onStatusInputChange = (element) => {
+    const onStatusInputChange = (element: React.ChangeEvent<HTMLInputElement>) => {
         setStatus(element.currentTarget.value)
     }
 
@@ -30,7 +38,7 @@ const ProfileStatusWithHooks = (props) => {
                     <input 
                         type="text" 
                         onChange={ onStatusInputChange } 
-                        value={status}
+                        value={localStatus}
                     />
                     
                     <button onClick={unToggleEdit}>Сохранить</button>
@@ -40,8 +48,8 @@ const ProfileStatusWithHooks = (props) => {
     } else {
         return (
             <>
-                <div><span>{props.status}</span></div>
-                { ( (props.userId === props.myId) && (props.isAuth) ) ? <div><button onClick={toggleEdit}>Редактировать</button></div> : null }
+                <div><span>{status}</span></div>
+                { ( (userId === myId) && (isAuth) ) ? <div><button onClick={toggleEdit}>Редактировать</button></div> : null }
             </>
         ) 
     }

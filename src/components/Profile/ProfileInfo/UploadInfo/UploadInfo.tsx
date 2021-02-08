@@ -1,13 +1,64 @@
 import React, { useState } from 'react'
-import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import * as yup from 'yup'
 import s from './UploadInfo.module.scss'
 
-export default function UploadInfo(props) {
+type PropsType = {
+    userId: number
+    isAuth: boolean
+    myId: number
+    sendInfoThunkCreator: (info: any) => void
+}
+type FormValues = {
+    aboutMe: string
+    facebook: string
+    github: string
+    instagram: string
+    mainLink: string
+    twitter: string
+    vk: string
+    website: string
+    youtube: string
+    lookingForAJob: string
+    lookingForAJobDescription: string
+    fullName: string
+}
+const UploadInfo: React.FC<PropsType> = (props) => {
     let [editMode, setEditMode] = useState(false)
     const onInfoUploadSubmit = (values) => {
-        props.sendInfoThunkCreator(values)
+        let submitValue = {
+            userId: props.myId,
+            aboutMe: values.aboutMe,
+            contacts: {
+                facebook: values.facebook,
+                github: values.github,
+                instagram: values.instagram,
+                mainLink: values.mainLink,
+                twitter: values.twitter,
+                vk: values.vk,
+                website: values.website,
+                youtube: values.youtube
+            },
+            lookingForAJob: values.lookingForAJob,
+            lookingForAJobDescription: values.lookingForAJobDescription,
+            fullName: values.fullName
+        }
+        props.sendInfoThunkCreator(submitValue)
         setEditMode(false)
+    }
+    let initialValues: FormValues = {
+        aboutMe: '',
+        facebook: '',
+        github: '',
+        instagram: '',
+        mainLink: '',
+        twitter: '',
+        vk: '',
+        website: '',
+        youtube: '',
+        lookingForAJob: '',
+        lookingForAJobDescription: '',
+        fullName: ''
     }
     if ((props.userId === props.myId) && (props.isAuth)) {
         if (editMode) {
@@ -15,38 +66,26 @@ export default function UploadInfo(props) {
                 <div className={s.modalBackground}>
                     <div className={s.modalContent}>
                         <Formik
-                            initialValues={{
-                                "fullName": "",
-                                "aboutMe": "",
-                                "github": "",
-                                "vk": "",
-                                "facebook": "",
-                                "instagram": "",
-                                "twitter": "",
-                                "website": "",
-                                "youtube": "",
-                                "mainLink": "",
-                                "lookingForAJob": false,
-                                "lookingForAJobDescription": ""
-                            }}
+                            initialValues={initialValues}
                             validationSchema={yup.object().shape({
-                                "fullName": yup.string().required("Please enter your name").min(3, 'Name must be more than 3 symbols'),
-                                "aboutMe": yup.string().required("Please add some info about youself").max(50, "This topic is limited by 50 symbols"),
-                                "github": yup.string().url("Please, provide a GitHub page URL").max(50, "URL length is limited by 50 symbols"),
-                                "facebook": yup.string().url("Please, provide a Facebook page URL").max(50, "URL length is limited by 50 symbols"),
-                                "instagram": yup.string().url("Please, provide a Instagram page URL").max(50, "URL length is limited by 50 symbols"),
-                                "twitter": yup.string().url("Please, provide a Twitter page URL").max(50, "URL length is limited by 50 symbols"),
-                                "website": yup.string().url("Please, provide your Website URL").max(50, "URL length is limited by 50 symbols"),
-                                "youtube": yup.string().url("Please, provide your Youtube channel URL").max(50, "URL length is limited by 50 symbols"),
-                                "mainLink": yup.string().url("Please, provide your Main Link").max(50, "URL length is limited by 50 symbols"),
-                                "lookingForAJob": yup.boolean(),
-                                "lookingForAJobDescription": yup.string().required("Please add some info about job you are trying to obtain").max(50, "This topic is limited by 50 symbols")
+                                aboutMe: yup.string().required("Please add some info about youself").max(50, "This topic is limited by 50 symbols"),
+                                facebook: yup.string().url("Please, provide a Facebook page URL").max(50, "URL length is limited by 50 symbols"),
+                                github: yup.string().url("Please, provide a GitHub page URL").max(50, "URL length is limited by 50 symbols"),
+                                instagram: yup.string().url("Please, provide a Instagram page URL").max(50, "URL length is limited by 50 symbols"),
+                                mainLink: yup.string().url("Please, provide your Main Link").max(50, "URL length is limited by 50 symbols"),
+                                twitter: yup.string().url("Please, provide a Twitter page URL").max(50, "URL length is limited by 50 symbols"),
+                                vk: yup.string().url("Please, provide a VK page URL").max(50, "URL length is limited by 50 symbols"),
+                                website: yup.string().url("Please, provide your Website URL").max(50, "URL length is limited by 50 symbols"),
+                                youtube: yup.string().url("Please, provide your Youtube channel URL").max(50, "URL length is limited by 50 symbols"),
+                                lookingForAJob: yup.boolean(),
+                                lookingForAJobDescription: yup.string().required("Please add some info about job you are trying to obtain").max(50, "This topic is limited by 50 symbols"),
+                                fullName: yup.string().required("Please enter your name").min(3, 'Name must be more than 3 symbols')
                             })}
                             onSubmit={(values) => { onInfoUploadSubmit(values) }}
                             validateOnBlur
                         >
                             {({ values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty }) => (
-                                <div>
+                                <Form>
                                     <div className={s.formGroup}>
                                         <h2>Personal Information</h2>
                                         <div className={s.formItem}>
@@ -66,7 +105,7 @@ export default function UploadInfo(props) {
                                                 name={"aboutMe"}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                value={values.newPost}
+                                                value={values.aboutMe}
                                             />
                                             {touched.aboutMe && errors.aboutMe && <p className={s.error}>{errors.aboutMe}</p>}
                                         </div>
@@ -188,10 +227,10 @@ export default function UploadInfo(props) {
                                         </div>
                                     </div>
                                     <div className={s.formButtons}>
-                                        <button disabled={!isValid && !dirty} onClick={handleSubmit} type="submit" className={`${s.submitBtn} ${s.formBtn} `}>Save</button>
+                                        <button disabled={!isValid && !dirty} type="submit" className={`${s.submitBtn} ${s.formBtn} `}>Save</button>
                                         <button onClick={() => setEditMode(false)} className={`${s.closeBtn} ${s.formBtn} `}>Close</button>
                                     </div>
-                                </div>
+                                </Form>
                             )}
                         </Formik>
 
@@ -205,3 +244,5 @@ export default function UploadInfo(props) {
         return null
     }
 }
+
+export default UploadInfo

@@ -1,8 +1,6 @@
 import Ava from "../assets/Ava.png";
-
-type initialStateType = {
-    friends: Array<{id: number, name: string, surname: string, avatar: any}>
-}
+export type friendType = {id: number, name: string, surname: string, avatar: any}
+type initialStateType = {friends: Array<friendType>}
 
 let initialState: initialStateType = {
     friends: [

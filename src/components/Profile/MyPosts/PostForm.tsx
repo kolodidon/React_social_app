@@ -1,45 +1,36 @@
 import React from 'react';
 import s from './MyPosts.module.scss'
-import Post from "./Post/Post";
-import Ava from "../../../assets/Ava.png";
-import { Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import * as yup from 'yup'
 
-const MyPosts = React.memo(props => {
-    let postElements = props.postData.map(post => <Post key={post.id} id={post.id} avatar={Ava} message={post.message} likesCounter={post.likesCounter} />)
-    return (
-        <div className={s.posts}>
-            <h2>My Posts</h2>
+type PropsType = {
+    addPost: (postText: string) => void
+}
+type FormValuesTypes = {
+    newPost: string
+}
 
-            <PostForm addPost={props.addPost} />
-
-            <div className={s.postList}>
-                {postElements}
-            </div>
-        </div>
-    )
-})
-
-const PostForm = (props) => {
-    let onAddPost = (postText) => {
+const PostForm: React.FC<PropsType> = (props) => {
+    let onAddPost = (postText: string) => {
         props.addPost(postText)
     }
     const validationSchema = yup.object().shape({
         newPost: yup.string().required('First type your post\'s text'),
     })
+    const initialValues: FormValuesTypes = {
+        newPost: ''
+    }
     return (
         <Formik
-            initialValues={{
-                newPost: ''
-            }}
+            initialValues={initialValues}
             onSubmit={(values, { resetForm }) => {
                 onAddPost(values.newPost)
-                resetForm({ values: '' })
+                resetForm({})
             }}
             validationSchema={validationSchema}
         >
             {({ values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty }) => (
-                <form className={s.writeMessage}>
+                <Form className={s.writeMessage}>
                     <textarea
                         placeholder='Type your post...'
                         name={"newPost"}
@@ -50,16 +41,15 @@ const PostForm = (props) => {
 
                     <button
                         disabled={!isValid && !dirty}
-                        onClick={handleSubmit}
                         type={'submit'}
                     >Add Post
                     </button>
 
                     {touched.newPost && errors.newPost && <p className={s.error}>{errors.newPost}</p>}
-                </form>
+                </Form>
             )}
         </Formik>
     )
 }
 
-export default MyPosts
+export default PostForm

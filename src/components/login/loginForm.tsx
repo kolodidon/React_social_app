@@ -1,44 +1,35 @@
 import React from 'react'
-import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import * as yup from 'yup'
 import s from './login.module.scss'
-import { loginUserThunkCreator } from "../../redux/auth-reducer";
-import {connect} from "react-redux";
-import { Redirect } from 'react-router-dom';
 
-
-
-const Login = (props) => {
-    if (props.isAuth) {
-        return <Redirect to ={"/profile"}/>
-    } else {
-        return (
-            <div className={s.loginWrapper}>
-                <h1>You need to login first:</h1>
-                <LoginForm 
-                    loginUserThunkCreator={props.loginUserThunkCreator} 
-                    errorMessage={props.errorMessage}
-                    captchaUrl={props.captchaUrl}
-                />
-            </div>
-        )
-    }
+type LoginFormPropsType = {
+    errorMessage: string | null
+    captchaUrl: string | null
+    loginUserThunkCreator: (email: string, password: string, rememberMe: boolean, captcha: string) => void
+}
+type LoginFormValuesType = {
+    email: string
+    password: string
+    remember: boolean
+    captcha: string
 }
 
-const LoginForm = (props) => {
+const LoginForm: React.FC<LoginFormPropsType> = (props) => {
     const validationSchema = yup.object().shape({
         email: yup.string().email('Valid email is required'),
         password: yup.string().typeError('Must be string').required('Password is required').min(3, 'Password must be more than 3 symbols')
     })
+    const initialValues: LoginFormValuesType = {
+        email: '',
+        password: '',
+        remember: false,
+        captcha: ''
+    }
     return(
         <div className={s.loginWrapper}>
             <Formik
-            initialValues={{
-                email: '',
-                password: '',
-                remember: false,
-                captcha: ''
-            }}
+            initialValues={initialValues}
             validateOnBlur
             onSubmit={(values) => {
                 props.loginUserThunkCreator(values.email, values.password, values.remember, values.captcha)
@@ -46,10 +37,10 @@ const LoginForm = (props) => {
             validationSchema={validationSchema}
         >
             {({ values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty }) => (
-                <div className={s.loginForm}>
+                <Form className={s.loginForm}>
                     {props.errorMessage && <p className={(props.errorMessage === "Logged Successful!") ? s.success : s.error}>{props.errorMessage}</p>}
                     
-                    <label for={"email"}>Email</label>
+                    <label htmlFor={"email"}>Email</label>
                     <input
                         type={"text"}
                         name={"email"}
@@ -59,7 +50,7 @@ const LoginForm = (props) => {
                     />
                     {touched.email && errors.email && <p className={s.error}>{errors.email}</p>}
 
-                    <label for={"password"}>Password</label>
+                    <label htmlFor={"password"}>Password</label>
                     <input
                         type={"password"}
                         name={"password"}
@@ -69,19 +60,18 @@ const LoginForm = (props) => {
                     />
                     {touched.password && errors.password && <p className={s.error}>{errors.password}</p>}
 
-                    <label for={"remember"}>Remember me
+                    <label htmlFor={"remember"}>Remember me
                         <input
                             type={"checkbox"}
                             name={"remember"}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values.remember}
                         />
                     </label>
 
                     {
                     props.captchaUrl && 
-                        <label for={"captcha"}>Captcha
+                        <label htmlFor={"captcha"}>Captcha
                         <input
                             type={"text"}
                             name={"captcha"}
@@ -95,26 +85,15 @@ const LoginForm = (props) => {
 
                     <button
                         disabled={!isValid && !dirty}
-                        onClick={handleSubmit}
                         type={'submit'}
                     >Login
                     </button>
-                </div>
+                </Form>
             )}
         </Formik>
         </div>
     )
 }
 
-let mapStateToProps = (state) => {
-    return {
-        errorMessage: state.auth.errorMessage,
-        captchaUrl: state.auth.captchaUrl,
-        isAuth: state.auth.isAuth
-    }
-}
-
-let actionCreators = {loginUserThunkCreator}
-
-export default connect(mapStateToProps, actionCreators)(Login);
+export default LoginForm
 

@@ -1,8 +1,16 @@
 import { useState } from "react";
 
-let Paginator = ({ totalUsersCount, pageSize, changeCurrentPage, currentPage, portionSize, styles }) => {
+type PaginatorPropsType = { 
+    totalUsersCount: number
+    pageSize: number
+    changeCurrentPage: (page: number) => void
+    currentPage: number
+    portionSize: number
+    styles: any 
+} 
+let Paginator: React.FC<PaginatorPropsType> = ({ totalUsersCount, pageSize, changeCurrentPage, currentPage, portionSize, styles }) => {
     let pagesCount = Math.ceil(totalUsersCount / pageSize);
-    let pages = [];
+    let pages: Array<number> = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }

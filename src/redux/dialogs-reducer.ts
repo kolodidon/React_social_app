@@ -1,11 +1,13 @@
 import Ava from '../assets/Ava.png'
+import { InferActionTypes } from './redux-store'
 
-const ADD_MESSAGE: string = 'ADD-MESSAGE'
 
 type initialStateType = {
     contactData: Array<{id: number, name: string, avatar: any}>
     messageData: Array<{id: number, text: string}>
 }
+type actionTypes = InferActionTypes<typeof actions>
+
 
 let initialState: initialStateType = {
     contactData: [
@@ -22,20 +24,21 @@ let initialState: initialStateType = {
     ]
 }
 
-const dialogsReducer = (state = initialState, action: any): initialStateType => {
-
+const dialogsReducer = (state = initialState, action: actionTypes): initialStateType => {
     switch (action.type) {
-        case ADD_MESSAGE:
+        case 'ADD_MESSAGE':
             return {
                 ...state,
                 messageData: [...state.messageData, {id: 5, text: action.messageText}]
             }
-
         default:
             return state;
     }
 }
 
-type addMessageActionType = {type: typeof ADD_MESSAGE, messageText: string}
-export const addMessageActionCreator = (messageText: string): addMessageActionType => ({type: ADD_MESSAGE, messageText})
+
+export const actions = {
+    addMessageActionCreator: (messageText: string) => ({type: 'ADD_MESSAGE', messageText} as const )
+}
+
 export default dialogsReducer

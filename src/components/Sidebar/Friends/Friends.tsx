@@ -1,8 +1,13 @@
 import React from 'react';
 import s from './Friends.module.scss'
 import Friend from "./Friend/Friend";
+import { friendType } from '../../../redux/sidebar-reducer';
 
-const Friends = (props) => {
+type PropsType = {
+    friends: Array<friendType>
+}
+
+const Friends: React.FC<PropsType> = (props) => {
 
     let friendsElements = props.friends.map( friend =>
         <Friend key={friend.id} id={friend.id} avatar={friend.avatar} name={friend.name} surname={friend.surname}/>)
